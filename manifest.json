@@ -1,0 +1,9 @@
+{
+  "name": "竞彩分析",
+  "short_name": "竞彩分析",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#e1f1fa",
+  "theme_color": "#9a3f5f",
+  "icons": [{ "src": "app-icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
