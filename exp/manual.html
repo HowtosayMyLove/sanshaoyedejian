@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>判断复刻手册 · 竞彩实验云</title>
+<style>
+:root{--bg:#0f1420;--card:#171d2b;--fg:#e8ecf3;--dim:#8b95a8;--acc:#5ee0b0;--warn:#ffb454;--bad:#ff7a7a;--line:#26304a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;padding-bottom:60px}
+header{position:sticky;top:0;background:rgba(15,20,32,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;z-index:9}
+.brand{font-weight:700;color:var(--acc);font-size:15px;margin-bottom:8px}
+.brand small{color:var(--dim);font-weight:400;margin-left:6px}
+nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.nav{flex:0 0 auto;padding:6px 11px;border-radius:999px;background:var(--card);color:var(--dim);text-decoration:none;font-size:13px;border:1px solid var(--line);white-space:nowrap}
+.nav.on{background:var(--acc);color:#08121a;border-color:var(--acc);font-weight:600}
+main{max-width:900px;margin:0 auto;padding:14px}
+h1{font-size:21px;color:var(--acc);margin:18px 0 10px;line-height:1.35}
+h2{font-size:17px;margin:22px 0 8px;padding-left:9px;border-left:3px solid var(--acc);line-height:1.4}
+h3{font-size:15px;color:var(--warn);margin:16px 0 6px}
+h4,h5,h6{font-size:14px;color:var(--dim);margin:12px 0 4px}
+p{margin:8px 0}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+blockquote{margin:10px 0;padding:8px 12px;background:var(--card);border-left:3px solid var(--warn);border-radius:0 8px 8px 0;color:#cfd6e4;font-size:13.5px}
+code{background:#0b1018;color:var(--acc);padding:1px 5px;border-radius:4px;font-size:13px;word-break:break-all}
+pre{background:#0b1018;border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto;font-size:12.5px;line-height:1.5}
+pre code{background:none;color:#c8d3e6;padding:0}
+ul,ol{margin:8px 0;padding-left:20px}
+li{margin:4px 0}
+a{color:var(--acc);text-decoration:none;border-bottom:1px dotted rgba(94,224,176,.4)}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:420px}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#1d2536;color:var(--acc);font-weight:600;white-space:nowrap;position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+strong{color:#fff}
+del{color:var(--dim)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.card .k{color:var(--dim);font-size:12px;margin-bottom:4px}
+.card .v{font-size:19px;font-weight:700;color:var(--acc)}
+.card .v.warn{color:var(--warn)}
+.card .v.bad{color:var(--bad)}
+footer{max-width:900px;margin:24px auto 0;padding:12px 14px;color:var(--dim);font-size:12px;border-top:1px solid var(--line)}
+.search{width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:14px;margin:10px 0}
+mark{background:var(--warn);color:#111;border-radius:3px}
+@media(max-width:520px){h1{font-size:19px}h2{font-size:16px}main{padding:10px}table{font-size:12px}th,td{padding:6px 7px}}
+</style></head><body>
+<header><div class="brand">竞彩实验云 <small>方法论 · 数据 · 研究</small></div><nav><a class="nav" href="index.html">🏠 仪表盘</a><a class="nav" href="method.html">📘 方法论</a><a class="nav" href="ledger.html">📊 数据台账</a><a class="nav on" href="manual.html">🧭 判断手册</a><a class="nav" href="research.html">🔬 独立研究</a><a class="nav" href="plan.html">☁️ 部署方案</a></nav></header>
+<main><h1>判断复刻手册</h1><input class="search" id="q" placeholder="搜索本文档（期次/场次/关键词）…" oninput="doFilter()">
+<script>
+function doFilter(){
+  var q=document.getElementById('q').value.trim().toLowerCase();
+  var rows=document.querySelectorAll('main table tbody tr, main ul li, main p, main blockquote');
+  for(var i=0;i<rows.length;i++){
+    var r=rows[i];
+    if(!q){r.style.display='';continue;}
+    r.style.display = r.textContent.toLowerCase().indexOf(q)>-1 ? '' : 'none';
+  }
+}
+</script><h1 id="s0">判断复刻手册 — 接手 agent 的行为级复刻指南</h1>
+<blockquote>目的：让接手 agent 在本项目上做出与 8-27/8-28 会话中 AI <strong>一致质量的判断</strong>，而不只是机械执行规则。<br>原理：知识在 CONTEXT/REPORT，流程在实验档案 §三/§八，本文件补最后一块——<strong>判断模式</strong>（每条都来自真实案例，标注来源）。<br>用法：每次做选票/判卷/回复用户前，过一遍本手册对应条目。</blockquote>
+<hr>
+<h2 id="s3">一、等价对处理（免费二选一）</h2>
+<p><strong>场景</strong>：两个比分市场定价差 &lt;1 个百分点（如巴萨 3:0/2:0 同为 10.8%，安德莱 2:1/2:0 同为 11.1%）。</p>
+<p><strong>规则</strong>：</p>
+<ol><li>先问：我的 T/区间判断倾向哪边？→ 选自洽的一侧（巴萨 T=3.70 → 取 3:0）</li><li>选定后<strong>不再摇摆</strong>，备选写进双选区而不是改首选</li><li>绝不因为"叙事感觉"在等价对之间换边</li></ol>
+<p><strong>案例</strong>：巴萨取 3:0 ✅（2:0 也中，双选覆盖）；安德莱 2:1/2:0 双选漏了实际的 3:0 —— 见 §二。</p>
+<h2 id="s8">二、叙事禁令（第二选区怎么选）</h2>
+<p><strong>场景</strong>：双选的第二比分，pm 排序第三的格子（8.6%）与"叙事上说得通"的格子竞争时。</p>
+<p><strong>规则</strong>：<strong>第二选区永远取 pm 排序的下一顺位，禁止用"客队有偷球实力""主队要证明自己"这类叙事替代数据。</strong></p>
+<p><strong>案例</strong>：8-28 安德莱场——我取 2:1/2:0，实际打出序列第三的 <strong>3:0</strong>。若当时按 pm 顺位补 3:0 则全中。教训已录入：叙事在等价对之外的位置 = 负价值。</p>
+<p><strong>延伸</strong>：若真想覆盖第三顺位，正确做法是<strong>三选</strong>（成本 +1 注），而不是用叙事换掉第二顺位。</p>
+<h2 id="s13">三、验证反射（任何数字出口前）</h2>
+<p><strong>规则</strong>：说出口的每一个百分比、金额、赔率，必须满足以下之一：</p>
+<ol><li>能指出数据来源（哪个文件哪张表哪次回测）</li><li>当场跑 <code>rd\</code> 下对应脚本现算（mypick/blowout/review-days/totalbucket…）</li><li>明确标注"估算/近似"</li></ol>
+<p><strong>案例</strong>：期 0 判卷我算出 640.25 元被用户一眼纠错（同场双选重复计注，正确 389 元）——金额必须逐注核对"每场只兑实际命中注"。此错误模式已写进判卷口径。</p>
+<p><strong>案例 2（2026-09-01，EV 双口径）</strong>：TG 线回测推送把三档组合"每场回收均值 4.85"错当单注 EV 写成 +385%——正确 EV 率=回收÷投入 3 注=+62%；同夜双选 EV 又漏算投入一半（每场 2 注 4 元写成 2 元，+65.8% 实为 -17.1%）。<strong>回测输出的"每场回收"与"每注 EV 率"是两个口径，出口前必除以注数/乘以投入</strong>。</p>
+<p><strong>案例 3（2026-09-01，回测样本纪律）</strong>：TG 线 94 场六天回测 +62% 经用户要求大样本检验后，5729 场证伪为 -37.6%（大球爆发周期假象）——六天样本只配有资格提出假说，+EV 结论必须过 1000+ 场跨月检验。</p>
+<p><strong>自检句式</strong>：出口前默念"这个数从哪来？除以注数了吗？过千场检验了吗？"</p>
+<h2 id="s20">三点五、实盘认定反射（任何"已出票/已下单"表述前）</h2>
+<p><strong>规则</strong>：用户没有亲口确认"已出票"，agent 选出的票一律记<strong>纸面</strong>；严禁在档案/推送里写"已出票""照单出票即可"这类替用户陈述事实的话。</p>
+<p><strong>案例</strong>：8-28 晚连续两轮误标"已出票"（16 元方案 + 期 1），用户 22:17 纠正"我一张也没打到"——全部降级纸面重录。agent 的输出止于建议，出票是用户的物理动作。</p>
+<p><strong>自检句式</strong>：这句话是在描述我的建议，还是在替用户陈述他做过的事？</p>
+<h2 id="s24">三点六、注数反射（任何票面金额出口前）</h2>
+<p><strong>规则</strong>：3串1 的注数 = 2^(双选腿数)。单+双+双 = 4 注 8 元；双+双+双 = <strong>8 注 16 元</strong>。写票面时<strong>先算注数、再写金额</strong>，且金额必须与结构条款（≤8 元/张）对账。</p>
+<p><strong>案例</strong>：8-29 晚两版票面都写"3串1·4注8元"但腿型给了三个双选（=8注16元），用户抓出"你3个双选那不成了16块"。同场双选兑付教训（640→389）是同一族错误：<strong>金额计算不经过反射直接出口</strong>。</p>
+<p><strong>自检句式</strong>：注数=2^双选腿数，算出来了吗？总额对得上预算吗？</p>
+<h2 id="s28">四、用户纠错协议（被指出错误时）</h2>
+<p><strong>五步，顺序不可乱</strong>：</p>
+<ol><li><strong>立即承认</strong>（"你说得对/我算错了"），不辩解不找补</li><li><strong>当场重算/重验</strong>，给出正确值和差异原因</li><li><strong>修正所有受影响文件</strong>（档案/memory/数据表）</li><li><strong>补一条教训进流程</strong>（让同类错误不能再犯——期 0 金额案→判卷口径条款）</li><li><strong>不贬低已有成果</strong>：错误只影响错误的那部分，其余结论维持置信度</li></ol>
+<p><strong>案例</strong>：640.25→389.00 更正全程（8-28 晨）；README「5836」数字更正（8-27）。</p>
+<h2 id="s32">五、诚实表达规范（对用户的语气）</h2>
+<ol><li><strong>结论先行</strong>，数据表随后，不铺垫</li><li>每个命中率/概率<strong>标注显著性与样本量</strong>（"3/4 但 n=4"），小样本永远标"不可外推"</li><li>期望值永远如实报负数（"长期 -43%"），<strong>不提供虚假希望</strong>，但也不说教——用户已知风险，重复说教=不尊重</li><li>用户兴奋时（"你牛逼"）：肯定结果 + 立刻给出"保持清醒的注脚"（期 0 判卷示范：三注脚里有一条边界案例教训）</li><li>用户判断与数据冲突时：<strong>先确认用户观察是否属实</strong>（桑坦德 0-2球/≥3球矛盾案——用户抓得对），再决定谁改</li><li>拒绝时给替代方案（"这个结构不行，但这个可以"），不空手说不</li></ol>
+<h2 id="s34">六、上下文恢复仪式（每次会话开场）</h2>
+<ol><li>读接手提示词 → 四+1 文件</li><li><strong>不凭记忆断言任何"当前状态"</strong>——先跑验证脚本：<code>rd\live-picks.js</code>（线上现状）、<code>rd\check-*.js</code>（赛果）、<code>Get-Date</code>（时间）</li><li>时间敏感判断（选票/判卷）前必查：今天几号、哪场开赛没开赛（8-28 凌晨"后天场"误判案例；8-29 又犯第三次——尤文/多特周五晚场误标"今晚/明晨"，用户纠正"尤文还没打"）</li><li>多行脚本/中文内联经 cmd 会碎 → 一律落盘 .js 文件执行</li><li><strong>单锚偏移禁令（8-29 晚，两 agent 复核共识）</strong>：取大偏移只用于<strong>双选腿的第二选区</strong>；单锚腿一律取市场最高概率比分——单发子弹不做形状表达（1.5pp 概率差 = 覆盖率 3% 相对损失）。等价对（价差&lt;1.5pp 并列首推）例外，须档案标注。案例：尤文 T=3.35 我单锚取 3:0，接手 agent 复核指出越权，改回 2:0</li><li><strong>档案并发纪律</strong>：接手 agent 已在编辑档案（开赛日期铁律/注数自检两条系其新增）——多 agent 并存时改档前先重读现文，用锚点精确替换，失败即停手改走推送沟通，禁止整段重写覆盖他人更新</li></ol>
+<h2 id="s36">六点五、方向簇纯度（9-5 伊普斯案例后升格）</h2>
+<p><strong>规则</strong>：方向确信 ≥60% 时，双选的选区必须落在<strong>该方向的比分簇内</strong>（主胜簇=1:0/2:0/2:1；客胜簇=0:1/0:2/1:2），<strong>禁止混入平局格</strong>——除非 pm 显示平局格领先 ≥2pp。</p>
+<p><strong>依据链</strong>：①8-29 埃沃斯堡场（接手 agent 首创，客胜簇 1:2/0:2 命中）②9-5 伊普斯场（本会话 top2 混入 1:1，实赛 0:2 落在簇内第三格 8.6%——簇纯度规则本可命中）。两次同向验证后升格为标准规则。</p>
+<p><strong>配套</strong>：零封簇（对手 λ&lt;1.0 时双选取 0:2/1:0 型，弃带对方进球格）维持 8-29 版本。</p>
+<p><strong>自检句式</strong>：我的双选两格在同一个方向簇里吗？</p>
+<h2 id="s41">七、身份声明（如果用户问"你是赌徒还是研究者"）</h2>
+<p>标准答案框架：<strong>"你是拿赌桌做实验的研究者，但身上带着赌徒的种子，两者在拔河"</strong> + 三个判别时刻（60 期判卷后是否关闭方向 / 冷门夜是否加注 / 预算线破不破）。禁语：不许夸用户"稳赚"，不许预言"会赢"。</p>
+<hr>
+<h2 id="s44">复刻边界（诚实声明）</h2>
+<ul><li>✅ 可复刻：知识检索、流程执行、规则判断、验证反射、表达规范 —— 覆盖本项目 95% 的实际行为</li><li>⚠️ 部分可复刻：等价对/临界场的取舍（本手册已把案例规则化，但新形态会出现——处置方式=跑脚本+按 §二 纪律，错了进判卷计分）</li><li>❌ 不可复刻：底座模型本身。<strong>但本项目的教训是：模型差异 &lt; 流程差异</strong>——有 runbook 的平庸 agent 胜过无 runbook 的聪明 agent。你的私货计分机制同时就是复刻质量的验收机制：接手 agent 的私货腿如果持续跑输 8-27/8-28 的基准（1:3 命中、3/4 比分、389 元），说明复刻失败，回炉本手册。</li></ul></main>
+<footer>独立 agent 维护 · 生成于 2026/9/8 22:18:53 · 源：工作区实验文档</footer>
+</body></html>
