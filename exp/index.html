@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>仪表盘 · 竞彩实验云</title>
+<style>
+:root{--bg:#0f1420;--card:#171d2b;--fg:#e8ecf3;--dim:#8b95a8;--acc:#5ee0b0;--warn:#ffb454;--bad:#ff7a7a;--line:#26304a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;padding-bottom:60px}
+header{position:sticky;top:0;background:rgba(15,20,32,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;z-index:9}
+.brand{font-weight:700;color:var(--acc);font-size:15px;margin-bottom:8px}
+.brand small{color:var(--dim);font-weight:400;margin-left:6px}
+nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.nav{flex:0 0 auto;padding:6px 11px;border-radius:999px;background:var(--card);color:var(--dim);text-decoration:none;font-size:13px;border:1px solid var(--line);white-space:nowrap}
+.nav.on{background:var(--acc);color:#08121a;border-color:var(--acc);font-weight:600}
+main{max-width:900px;margin:0 auto;padding:14px}
+h1{font-size:21px;color:var(--acc);margin:18px 0 10px;line-height:1.35}
+h2{font-size:17px;margin:22px 0 8px;padding-left:9px;border-left:3px solid var(--acc);line-height:1.4}
+h3{font-size:15px;color:var(--warn);margin:16px 0 6px}
+h4,h5,h6{font-size:14px;color:var(--dim);margin:12px 0 4px}
+p{margin:8px 0}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+blockquote{margin:10px 0;padding:8px 12px;background:var(--card);border-left:3px solid var(--warn);border-radius:0 8px 8px 0;color:#cfd6e4;font-size:13.5px}
+code{background:#0b1018;color:var(--acc);padding:1px 5px;border-radius:4px;font-size:13px;word-break:break-all}
+pre{background:#0b1018;border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto;font-size:12.5px;line-height:1.5}
+pre code{background:none;color:#c8d3e6;padding:0}
+ul,ol{margin:8px 0;padding-left:20px}
+li{margin:4px 0}
+a{color:var(--acc);text-decoration:none;border-bottom:1px dotted rgba(94,224,176,.4)}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:420px}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#1d2536;color:var(--acc);font-weight:600;white-space:nowrap;position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+strong{color:#fff}
+del{color:var(--dim)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.card .k{color:var(--dim);font-size:12px;margin-bottom:4px}
+.card .v{font-size:19px;font-weight:700;color:var(--acc)}
+.card .v.warn{color:var(--warn)}
+.card .v.bad{color:var(--bad)}
+footer{max-width:900px;margin:24px auto 0;padding:12px 14px;color:var(--dim);font-size:12px;border-top:1px solid var(--line)}
+.search{width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:14px;margin:10px 0}
+mark{background:var(--warn);color:#111;border-radius:3px}
+@media(max-width:520px){h1{font-size:19px}h2{font-size:16px}main{padding:10px}table{font-size:12px}th,td{padding:6px 7px}}
+</style></head><body>
+<header><div class="brand">竞彩实验云 <small>方法论 · 数据 · 研究</small></div><nav><a class="nav on" href="index.html">🏠 仪表盘</a><a class="nav" href="method.html">📘 方法论</a><a class="nav" href="ledger.html">📊 数据台账</a><a class="nav" href="manual.html">🧭 判断手册</a><a class="nav" href="research.html">🔬 独立研究</a><a class="nav" href="plan.html">☁️ 部署方案</a></nav></header>
+<main><h1>竞彩实验云 · 仪表盘</h1>
+<p style="color:var(--dim);font-size:13px">实验方法论、期次数据、判断手册与独立研究结论，云端随时可查。</p>
+<div class="grid">
+<div class="card"><div class="k">已跑正式期数</div><div class="v">4 / 60</div></div>
+<div class="card"><div class="k">全中次数</div><div class="v">1</div></div>
+<div class="card"><div class="k">实测全中频率</div><div class="v warn">1/4 = 25%（⚠n=4 不可外推；期 1 覆盖 0.87%≈1/115 属尾部事件提前到货）</div></div>
+</div>
+<h2>累计投入 / 回报</h2><p>期 0 热身：34 元 / 389.00 元（+355.00，不计入统计）。正式实验：期 1+期 3+期 4 合计 40 元投入 / 496.13 元回报（+456.13）——期 1 8投496.13回（全中），期 3 16投0回（比分 1/3 票死），期 4 16投0回（比分 0/3 票死）。⚠判卷金额口径：同场双选只兑实际命中注（期 0 教训）</p>
+<h2>停期记录</h2><p>期 5（9-2，合格腿 1/3——弗拉门戈 79 唯一合格，拜仁场 93 连续第三日被层 1 击落）· 期 7（9-5，可买合格腿仅本菲卡 1/3；C 方案解禁提案因三腿全为 9-6/9-7 开赛被用户纠正"不适宜当期"撤销，转 9-6 期候选）</p>
+<h2>期次索引（最近）</h2><div class="tw"><table><thead><tr><th>期次 / 票</th></tr></thead><tbody>
+<tr><td>期 5-60 · 模板（每日一行追加）</td></tr><tr><td>独立科学研究 · 赛前 T 校准检验（2026-09-08 深夜 · 用户指令"不局限于现有方法论，以独立 agent 的科学独立性思考最可能的命中"·<code>rd/calib-sum2.js</code> / <code>calib-T.js</code> / <code>calib-EV.js</code> / <code>calib-robust.js</code>）</td></tr><tr><td>期 9 · 复盘汇总 + 我的思路模拟票（<strong>今天 = 2026-09-08 周二</strong> · 用户指令"找源文件实验文档→复盘→以你的思路看今天的实验票，已过时间作模拟票"）</td></tr><tr><td>期 8 · 2026-09-06 周日批 · ✅判卷（9-8 20:2x，以并行会话 v4 为唯一有效版——v2/v3 圣克拉拉系停售作废）</td></tr><tr><td>期 9 · 2026-09-08 周二批（欧冠周，开赛 9-9 凌晨~9-10）· <strong>停期</strong></td></tr><tr><td>期 8 · 2026-09-06 周日批 · ✅判卷（9-8 20:1x，三串 1/3 腿票死+四串 2/4 票死，纸面 0 元）</td></tr><tr><td>期 8 · 2026-09-06 周日批 · 层 2 解禁池票面（9-6 21:4x 预筛+推送，纸面待确认）</td></tr><tr><td>期 7 · 2026-09-05 周六批 · 当期三串（不跨日，层 2 解禁沿用户授权）· 纸面待确认</td></tr><tr><td>让球线 · 示范票（纸面 2 元 · 用户指令"选一张让球实验票"· HC 线预注册提案待批）· 2026-09-03 晚</td></tr><tr><td>期 6 · 2026-09-03 周四批（开赛 9-4 凌晨~9-5 凌晨）· 预筛 20:3x · 纸面待用户确认</td></tr><tr><td>期 5 · 2026-09-02 周三批（开赛 9-2 晚~9-4 凌晨）· <strong>停期</strong></td></tr><tr><td>实验票大样本回测（9-2 00:0x，用户指令"回测实验票的可能性"·<code>rd\exp-backtest.js</code>/<code>exp-final.js</code>）</td></tr><tr><td>期 4 模拟票（纸面 0 元 · 用户指令"当做十点前在售"· 回测迭代的首次实盘试跑）· 2026-09-01 22:2x</td></tr><tr><td>TG 线 · 总进球档位对照实验（预注册提案待批 · 2026-09-01 回测建立）</td></tr>
+</tbody></table></div>
+<h2>入口</h2>
+<ul>
+<li><a href="method.html">📘 方法论</a>——预注册规则、五层筛选、判卷流程、值班手册</li>
+<li><a href="ledger.html">📊 数据台账</a>——全部期次与测试票、累计计数器（可搜索）</li>
+<li><a href="manual.html">🧭 判断手册</a>——行为级复刻指南（等价对/叙事禁令/验证反射等）</li>
+<li><a href="research.html">🔬 独立研究</a>——1753 场校准检验：赛前 T 与命中率/EV 的关系</li>
+<li><a href="plan.html">☁️ 部署方案</a>——网站轨与实验轨独立运行设计</li>
+</ul></main>
+<footer>独立 agent 维护 · 生成于 2026/9/8 22:18:53 · 源：工作区实验文档</footer>
+</body></html>
