@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>部署方案 · 竞彩实验云</title>
+<style>
+:root{--bg:#0f1420;--card:#171d2b;--fg:#e8ecf3;--dim:#8b95a8;--acc:#5ee0b0;--warn:#ffb454;--bad:#ff7a7a;--line:#26304a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;padding-bottom:60px}
+header{position:sticky;top:0;background:rgba(15,20,32,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;z-index:9}
+.brand{font-weight:700;color:var(--acc);font-size:15px;margin-bottom:8px}
+.brand small{color:var(--dim);font-weight:400;margin-left:6px}
+nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.nav{flex:0 0 auto;padding:6px 11px;border-radius:999px;background:var(--card);color:var(--dim);text-decoration:none;font-size:13px;border:1px solid var(--line);white-space:nowrap}
+.nav.on{background:var(--acc);color:#08121a;border-color:var(--acc);font-weight:600}
+main{max-width:900px;margin:0 auto;padding:14px}
+h1{font-size:21px;color:var(--acc);margin:18px 0 10px;line-height:1.35}
+h2{font-size:17px;margin:22px 0 8px;padding-left:9px;border-left:3px solid var(--acc);line-height:1.4}
+h3{font-size:15px;color:var(--warn);margin:16px 0 6px}
+h4,h5,h6{font-size:14px;color:var(--dim);margin:12px 0 4px}
+p{margin:8px 0}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+blockquote{margin:10px 0;padding:8px 12px;background:var(--card);border-left:3px solid var(--warn);border-radius:0 8px 8px 0;color:#cfd6e4;font-size:13.5px}
+code{background:#0b1018;color:var(--acc);padding:1px 5px;border-radius:4px;font-size:13px;word-break:break-all}
+pre{background:#0b1018;border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto;font-size:12.5px;line-height:1.5}
+pre code{background:none;color:#c8d3e6;padding:0}
+ul,ol{margin:8px 0;padding-left:20px}
+li{margin:4px 0}
+a{color:var(--acc);text-decoration:none;border-bottom:1px dotted rgba(94,224,176,.4)}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:420px}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#1d2536;color:var(--acc);font-weight:600;white-space:nowrap;position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+strong{color:#fff}
+del{color:var(--dim)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.card .k{color:var(--dim);font-size:12px;margin-bottom:4px}
+.card .v{font-size:19px;font-weight:700;color:var(--acc)}
+.card .v.warn{color:var(--warn)}
+.card .v.bad{color:var(--bad)}
+footer{max-width:900px;margin:24px auto 0;padding:12px 14px;color:var(--dim);font-size:12px;border-top:1px solid var(--line)}
+.search{width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:14px;margin:10px 0}
+mark{background:var(--warn);color:#111;border-radius:3px}
+@media(max-width:520px){h1{font-size:19px}h2{font-size:16px}main{padding:10px}table{font-size:12px}th,td{padding:6px 7px}}
+</style></head><body>
+<header><div class="brand">竞彩实验云 <small>方法论 · 数据 · 研究</small></div><nav><a class="nav" href="index.html">🏠 仪表盘</a><a class="nav" href="method.html">📘 方法论</a><a class="nav" href="ledger.html">📊 数据台账</a><a class="nav" href="manual.html">🧭 判断手册</a><a class="nav" href="research.html">🔬 独立研究</a><a class="nav on" href="plan.html">☁️ 部署方案</a></nav></header>
+<main><h1>部署方案</h1><h1 id="s0">部署方案 · 网站轨与实验轨独立运行</h1>
+<blockquote>生成：2026-09-08 深夜 · 由独立 agent 编写 · 写入本工作区，<strong>不改动源项目任何文件</strong><br>现状勘察：ECS <code>120.26.16.4</code> 主站 HTTP 200（71.8KB）· 本机 <code>C:\jingcai\</code> 部署暂存与云助手链路在位 · 实验侧目前为本地 agent 手动跑</blockquote>
+<hr>
+<h2 id="s3">一、结论先行</h2>
+<p><strong>能，且建议双轨物理隔离。</strong> 网站轨与实验轨的共同依赖只有「titan007 数据源 + PushPlus 微信推送」，彼此不需要对方的数据，因此可以完全独立部署、独立重启、独立故障。</p>
+<div class="tw"><table><thead><tr><th>维度</th><th>网站轨</th><th>实验轨</th></tr></thead><tbody><tr><td>目标</td><td>对外可访问的分析站（5 tab）</td><td>60 期实验选票/判卷/研究</td></tr><tr><td>代码</td><td><code>index.js</code> + <code>server.js</code> + <code>dist/</code> + <code>www/</code></td><td><code>rd/*.js</code>（选票/判卷/校准）+ 台账 md</td></tr><tr><td>对外端口</td><td><strong>80</strong>（公网访问）</td><td><strong>无</strong>（只出站抓取 + 微信推送）</td></tr><tr><td>触发</td><td>12–21 点整点 + 21:30/22:30 推送</td><td>12:10 判卷 / 21:10 选票 / 周日校准</td></tr><tr><td>失败影响</td><td>网站 502</td><td>实验停期（不影响网站）</td></tr><tr><td>资源</td><td>静态文件 + 每小时一次抓取</td><td>脚本几分钟一次，极轻</td></tr></tbody></table></div>
+<hr>
+<h2 id="s7">二、两种架构</h2>
+<h3 id="s8">架构 A · 单机双隔离（推荐起步）</h3>
+<p>同一台服务器，目录/进程/任务三重隔离：</p>
+<pre><code>C:\jingcai\            ← 网站轨（现有，勿动）
+   server.js           端口 80，开机自启（任务计划 JingcaiWeb）
+   index.js  dist\  www\  snapshots\
+
+C:\jingcai-exp\        ← 实验轨（新增，完全独立）
+   rd\                  选票/判卷/校准脚本
+   实验数据台账.md       只追加
+   实验档案-全中假说.md   方法档
+   logs\                每次运行日志
+   out.txt              推送稿</code></pre>
+<ul><li>任务计划：<code>JingcaiWeb</code>（网站，AtStartup）+ <code>JingcaiExp</code>（实验，每日 12:10/21:10）</li><li>端口：网站独占 80；实验<strong>不监听任何端口</strong></li><li>数据：实验只写 <code>C:\jingcai-exp\</code>，绝不触碰 <code>C:\jingcai\</code></li><li>隔离度：进程级（实验脚本崩溃/死循环不影响网站 Node 进程）</li></ul>
+<h3 id="s12">架构 B · 双机完全独立（有第二台服务器时）</h3>
+<ul><li>服务器 1（现有 ECS）：网站轨，维持现状</li><li>服务器 2（新）：实验轨，仅需 Node + 出站网络</li><li>优点：物理隔离，网站流量与实验计算零干扰；实验可随意重启/回滚</li><li>代价：多一台机器成本；两套部署链路（但实验轨部署更简单——无公网端口、无域名/备案要求）</li></ul>
+<p><strong>建议</strong>：先上架构 A 验证，若实验任务变重（如每日跑大样本回测）再拆到 B。实验轨最低配 <strong>1 核 2G</strong> 足够。</p>
+<hr>
+<h2 id="s16">三、实验轨自动化设计（针对历史事故的硬约束）</h2>
+<p>历史事故（来自台账/日志，必须在服务器版根治）：</p>
+<div class="tw"><table><thead><tr><th>事故</th><th>根因</th><th>服务器版对策</th></tr></thead><tbody><tr><td>值守多次未触发（runCount 卡住）</td><td>依赖 ZCode 宿主调度</td><td>改用 <strong>Windows 任务计划</strong>（OS 级，不依赖 agent 宿主）</td></tr><tr><td>9-3 推送含不存在场次</td><td>脚本依赖手改 <code>WATCH</code> 数组的旧数据</td><td><strong>每次运行重新拉全量在售</strong>，禁用任何硬编码场次</td></tr><tr><td>并行会话覆盖 out.txt</td><td>多进程同写</td><td>实验轨<strong>单进程串行 + 文件锁</strong>，任务计划不允许并行实例</td></tr><tr><td>台账并发写冲突</td><td>多 agent 同时编辑</td><td>单进程追加写；写入前校验尾部行</td></tr><tr><td>PushPlus 999 防刷</td><td>同标题同内容</td><td>标题自动带时间戳</td></tr></tbody></table></div>
+<p><strong>每日任务编排</strong>：</p>
+<pre><code>12:10  判卷档：拉昨日赛果 → 三层判卷（方向/总球桶/比分）→ 追加台账 → 推微信
+21:10  选票档：拉在售全量 → 层1否决 → 层2筛选 → 组装 → 硬校验 → 推微信
+周日 22:00  校准档：重跑 calib-*.js（T 分层/前二和/EV 稳健性）→ 报告 alpha 是否衰减</code></pre>
+<p><strong>选票前硬校验（脚本内强制，失败即停）</strong>：</p>
+<ol><li>每腿开赛日期时间与在售页一致（防跨日漏打）</li><li>注数 = 2^(双选腿数)，金额与结构对账（防 8注16元错版）</li><li>否决闸门复核（P总5≥25% ∨ P净4≥20% 即剔除）</li><li>单腿复用 ≤2 张票</li><li>台账追加成功后才推送</li></ol>
+<p><strong>关于"判断"</strong>：五层筛选、否决、pm 前二组装<strong>可完全脚本化</strong>（确定性、可复现、零事故）。私货形态偏移若需 LLM 判断，则服务器侧调 API 或保留本机 agent 半自动——<strong>建议先跑纯规则版</strong>，把判断留给人工复核。</p>
+<hr>
+<h2 id="s25">四、部署步骤（新服务器，约 20 分钟）</h2>
+<ol><li><strong>装 Node</strong>：<code>winget install OpenJS.NodeJS.LTS</code> 或官网 zip（≥ v20）</li><li><strong>建目录</strong>：<code>C:\jingcai-exp\</code>，上传 <code>rd/</code>（脚本）、<code>data/</code>（历史矩阵）、两份实验 md</li><li><strong>配置 token</strong>：从 <code>index.js</code> 读 PushPlus token（或写环境变量，勿硬编码进脚本）</li><li><strong>注册任务</strong>：</li></ol>
+<p>   ```powershell</p>
+<p>   $a = New-ScheduledTaskAction -Execute 'C:\Program Files\nodejs\node.exe' -Argument 'C:\jingcai-exp\rd\daily.js' -WorkingDirectory 'C:\jingcai-exp'</p>
+<p>   $t1 = New-ScheduledTaskTrigger -Daily -At 12:10</p>
+<p>   $t2 = New-ScheduledTaskTrigger -Daily -At 21:10</p>
+<p>   Register-ScheduledTask -TaskName 'JingcaiExp' -Action $a -Trigger $t1,$t2 -User 'SYSTEM' -RunLevel Highest</p>
+<p>   ```</p>
+<p>   ⚠ 坑（历史记录）：<code>-User 'SYSTEM' -RunLevel Highest</code> 必加，否则 0x80070534</p>
+<ol><li><strong>Dry-run</strong>：<code>node rd\daily.js --skip-push</code> 验证抓取/筛选/写台账全链路</li><li><strong>首次真实运行</strong>：手动触发一次，核对微信推送</li><li><strong>上线</strong>：任务计划 Enable</li></ol>
+<p><strong>服务器无需</strong>：公网端口、域名备案、HTTPS（实验轨只出站）</p>
+<hr>
+<h2 id="s37">五、风险与注意</h2>
+<ol><li><strong>服务器上没有 LLM</strong>：纯规则脚本可跑；如需 agent 判断，需 API key + 出站额度</li><li><strong>数据源限频</strong>：titan007 限并发 5、澳客 300ms 间隔——服务器版需保留节流（历史封 IP 事故）</li><li><strong>凭证管理</strong>：阿里云 AccessKey 轮换（历史两次明文泄漏）；微信 token 建议环境变量</li><li><strong>台账单一写者</strong>：服务器接管后，本机 agent 改走"读服务器台账 + 只提建议"，避免双写</li><li><strong>回滚</strong>：实验轨脚本改动前先备份到 <code>backup\</code>，与网站轨备份链同规矩</li></ol>
+<hr>
+<h2 id="s40">六、下一步（需你确认）</h2>
+<ul><li>[ ] 用<strong>现有 ECS</strong>（架构 A）还是<strong>新服务器</strong>（架构 B）？</li><li>[ ] 实验轨是否接 LLM（要 API key）还是先纯规则版？</li><li>[ ] 需要我直接写 <code>rd/daily.js</code>（判卷+选票一体化入口）并本地 dry-run 验证吗？</li><li>[ ] 服务器凭证（IP/RDP 或云助手 AK）——沿用现有 <code>run-deploy.js</code> 链路可免手工上传</li></ul></main>
+<footer>独立 agent 维护 · 生成于 2026/9/8 22:18:53 · 源：工作区实验文档</footer>
+</body></html>
